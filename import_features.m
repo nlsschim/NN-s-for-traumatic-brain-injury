@@ -30,11 +30,11 @@ opts.DataLines = dataLines;
 opts.Delimiter = ",";
 
 % Specify column names and types
-opts.VariableNames = ["Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "h1Real", "h1Imag", "h2Real", "h2Imag", "h3Real", "h3Imag", "h4Real", "h4Imag", "h5Real", "h5Imag", "Var18", "Var19", "Var20", "Var21", "Var22"];
-opts.SelectedVariableNames = ["h1Real", "h1Imag", "h2Real", "h2Imag", "h3Real", "h3Imag", "h4Real", "h4Imag", "h5Real", "h5Imag"];
-opts.VariableTypes = ["string", "string", "string", "string", "string", "string", "string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "string", "string", "string", "string", "string"];
-opts = setvaropts(opts, [1, 2, 3, 4, 5, 6, 7, 18, 19, 20, 21, 22], "WhitespaceRule", "preserve");
-opts = setvaropts(opts, [1, 2, 3, 4, 5, 6, 7, 18, 19, 20, 21, 22], "EmptyFieldRule", "auto");
+opts.VariableNames = ["Var1", "fileID", "fileNum", "class", "Var5", "Var6", "Var7", "h1Real", "h1Imag", "h2Real", "h2Imag", "h3Real", "h3Imag", "h4Real", "h4Imag", "h5Real", "h5Imag", "Var18", "Var19", "Var20", "Var21", "Var22"];
+opts.SelectedVariableNames = ["fileID", "fileNum", "h1Real", "h1Imag", "h2Real", "h2Imag", "h3Real", "h3Imag", "h4Real", "h4Imag", "h5Real", "h5Imag"];
+opts.VariableTypes = ["string", "string", "double", "string", "string", "string", "string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "string", "string", "string", "string", "string"];
+opts = setvaropts(opts, [1, 5, 6, 7, 18, 19, 20, 21, 22], "WhitespaceRule", "preserve");
+opts = setvaropts(opts, [1, 5, 6, 7, 18, 19, 20, 21, 22], "EmptyFieldRule", "auto");
 opts.ExtraColumnsRule = "ignore";
 opts.EmptyLineRule = "read";
 

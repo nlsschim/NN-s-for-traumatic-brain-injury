@@ -13,29 +13,78 @@ writetable(feature_data, 'feature_data.csv', 'Delimiter', ',', 'QuoteStrings', t
 
 % convert tables to matrices
 target_data = target_data{:,:}';
-features = feature_data{:,:}';
+feature_data = feature_data{:,:}';
 % func = @(var) round(var,0); % set rounding fxn
 % varfun(func, features(3,:)); % round target data to be binary
 
 %% split into train and validation
-first_29 = features(features(2,:) ~= string(30));
-S=size(first_29);
-len = S(2);
-train_features = features(3:12, 2:len);
-train_features = str2double(train_features);
-train_targets = target_data(:,2:len);
 
-validation_features = features(3:12, len+1:end);
-validation_features = str2double(validation_features);
-validation_targets = target_data(:,len+1:end);
+%figure 
+%hold on
+%index_count = 2;
+predictions = struct('val_targets',{}, 'val_preds',{}, 'train_targets',{}, 'train_preds',{});
+features = feature_data(2:end,2:end);
+for ii=1:30
+    
+    disp(ii)
+    
+    train_inds = find(features(1,:) ~= string(ii));
+    val_inds = find(features(1,:) == string(ii));
+    train_features = str2double(features(2:end, train_inds));
+    val_features = str2double(features(2:end, val_inds));
+    train_targets = target_data(train_inds);
+    val_targets = target_data(val_inds);
+    
+    net = patternnet(10);
+    [net,tr] = train(net, train_features, train_targets);
+    train_preds = net(train_features);
+    val_preds = net(val_features);
+    
+    %predictions = [];
+    predictions(ii).val_targets = val_targets;
+    predictions(ii).val_preds = val_preds;
+    predictions(ii).train_targets = train_targets;
+    predictions(ii).train_preds = train_preds;
+    
 
-net = patternnet(10);
-[net,tr] = train(net, train_features, train_targets);
-plotperform(tr)
+end
 
 %% cross validation
 
-validation_preds = net(validation_features);
-testClasses = validation_preds > 0.2;
-plotconfusion(validation_targets, testClasses)
-%plotroc(validation_targets, validation_preds)
+
+%% trying stuff out
+figure
+hold on
+title('Training ROC curve');
+xlabel('False Positive Rate');
+ylabel('True Positive Rate');
+for ii=1:30
+labels = predictions(ii).train_targets;
+scores = predictions(ii).train_preds;
+posClass = 1;
+[X,Y] = perfcurve(labels, scores, posClass);
+plot(X,Y)
+end
+hold off
+
+figure
+hold on
+title('Validation ROC curve');
+xlabel('False Positive Rate');
+ylabel('True Positive Rate');
+for ii=1:30
+labels = predictions(ii).val_targets;
+scores = predictions(ii).val_preds;
+posClass = 1;
+[X,Y] = perfcurve(labels, scores, posClass);
+plot(X,Y)
+end
+hold off
+
+%% bunch of nets
+netOne = patternnet(4);
+% netTwo = patternnet(8);
+% netThree = patternnet(12);
+% netFour = patternnet(16);
+
+predictions = neural_net(netOne, feature_data, target_data);

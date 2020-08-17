@@ -88,3 +88,16 @@ netOne = patternnet(4);
 % netFour = patternnet(16);
 
 predictions = neural_net(netOne, feature_data, target_data);
+%% more preds
+netTwo = patternnet(8);
+preds_eight = neural_net(netTwo, feature_data, target_data);
+
+%% preds
+
+[x, Y] = gen_roc_curves(predictions, 4);
+
+
+%% plotting for the nets
+plot(X,Y)
+
+

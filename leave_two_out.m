@@ -19,8 +19,8 @@ for ii=1:29
     
     train_inds = find(features(1,:) ~= jj | ii);
     val_inds = find(features(1,:) == jj | ii);
-    train_features = features(3:end, train_inds);
-    val_features = features(3:end, val_inds);
+    train_features = features(2:end, train_inds);
+    val_features = features(2:end, val_inds);
     train_targets = target_data(train_inds);
     val_targets = target_data(val_inds);
 

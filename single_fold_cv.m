@@ -7,10 +7,10 @@ for ii=1:30
     
     disp(ii)
     
-    train_inds = find(features(1,:) ~= string(ii));
-    val_inds = find(features(1,:) == string(ii));
-    train_features = str2double(features(2:end, train_inds));
-    val_features = str2double(features(2:end, val_inds));
+    train_inds = find(features(1,:) ~= ii);
+    val_inds = find(features(1,:) == ii);
+    train_features = features(2:end, train_inds);
+    val_features = features(2:end, val_inds);
     train_targets = target_data(train_inds);
     val_targets = target_data(val_inds);
     

@@ -1,6 +1,11 @@
 function [predictions] = neural_net(net, feature_data, target_data)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
+
+% 
+% Does this file/function get used? 
+% 
+
 predictions = struct('val_targets',{}, 'val_preds',{}, 'train_targets',{}, 'train_preds',{});
 features = feature_data(2:end,2:end);
 for ii=1:30
@@ -27,5 +32,5 @@ for ii=1:30
     
 
 end
-end
 
+end

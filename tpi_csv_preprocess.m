@@ -21,10 +21,4 @@ feature_data = table2array(feature_data)';
 % func = @(var) round(var,0); % set rounding fxn
 % varfun(func, features(3,:)); % round target data to be binary
 
-
 end
-
-
-
-
-

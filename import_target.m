@@ -18,6 +18,11 @@ function target_data = import_target(filename, dataLines)
 %% Input handling
 
 % If dataLines is not specified, define defaults
+
+% 
+% Same here as `import_features.m` -- check for the actual variable 'dataLines' being empty if you can, as its more explicit.
+% 
+
 if nargin < 2
     dataLines = [1, Inf];
 end
@@ -28,6 +33,10 @@ opts = delimitedTextImportOptions("NumVariables", 22);
 % Specify range and delimiter
 opts.DataLines = dataLines;
 opts.Delimiter = ",";
+
+% 
+% Same concern as 'import_features.m' -- does 'opts' get written and overwritten multiple times here?
+% 
 
 % Specify column names and types
 opts.VariableNames = ["Var1", "Var2", "Var3", "class", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10", "Var11", "Var12", "Var13", "Var14", "Var15", "Var16", "Var17", "Var18", "Var19", "Var20", "Var21", "Var22"];

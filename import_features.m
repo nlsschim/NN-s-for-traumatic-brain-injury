@@ -18,6 +18,16 @@ function feature_data = import_features(filename, dataLines)
 %% Input handling
 
 % If dataLines is not specified, define defaults
+
+% 
+% If in Matlab you can just check that `dataLines == null` instead of checking for the number
+%  of provided arguments, I think that's cleaner and more explicit as to what you're switching on.
+% 
+% What does this 'dataLines = [1, Inf]' actually do?
+%  From a perspective with little matlab experience, it looks like you're defining an infinite
+%  range for 'dataLines' but it's unclear why or what affect that has.
+% 
+
 if nargin < 2
     dataLines = [1, Inf];
 end
@@ -30,6 +40,13 @@ opts.DataLines = dataLines;
 opts.Delimiter = ",";
 
 % Specify column names and types
+
+% 
+% In the following lines, how many times is 'opts' set to a new object?
+%  Does line 53 completely overwrite the members set just before it?
+%  Does line 54 completely overwrite what's done in line 53?
+% 
+
 opts.VariableNames = ["Var1", "fileNum", "fileID", "class", "Var5", "Var6", "Var7", "h1Real", "h1Imag", "h2Real", "h2Imag", "h3Real", "h3Imag", "h4Real", "h4Imag", "h5Real", "h5Imag", "Var18", "Var19", "Var20", "Var21", "Var22"];
 opts.SelectedVariableNames = ["fileNum", "h1Real", "h1Imag", "h2Real", "h2Imag", "h3Real", "h3Imag", "h4Real", "h4Imag", "h5Real", "h5Imag"];
 opts.VariableTypes = ["string", "double", "string", "string", "string", "string", "string", "double", "double", "double", "double", "double", "double", "double", "double", "double", "double", "string", "string", "string", "string", "string"];
